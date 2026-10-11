@@ -1,18 +1,20 @@
-const path = require('path');
-const express = require('express');
 
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
 
-const app = express();
+    if (url.pathname === "/") {
+      return env.ASSETS.fetch(
+        new Request(new URL("/index.html", request.url))
+      );
+    }
 
-app.use('',express.static(path.join(__dirname, 'public')));
+    if (url.pathname === "/auth/discord") {
+      return env.ASSETS.fetch(
+        new Request(new URL("/dashboard.html", request.url))
+      );
+    }
 
-app.get('/', (request, response) => {
-	return response.sendFile('index.html', { root: '.' });
-});
-
-app.get('/auth/discord', (request, response) => {
-	return response.sendFile('dashboard.html', { root: '.' });
-});
-
-const port = '53134';
-app.listen(port, () => console.log(`App listening at http://localhost:${port}`));
+    return env.ASSETS.fetch(request);
+  },
+};
