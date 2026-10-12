@@ -15,7 +15,7 @@ export default {
       );
     }
 
-        if (url.pathname === "auth/discord?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request&iss=https%3A%2F%2Fdiscord.com") {
+        if (url.pathname === "/auth/discord?error=access_denied&error_description=The+resource+owner+or+authorization+server+denied+the+request&iss=https%3A%2F%2Fdiscord.com") {
       return env.ASSETS.fetch(
         new Request(new URL("/boohoo.html", request.url))
       );
